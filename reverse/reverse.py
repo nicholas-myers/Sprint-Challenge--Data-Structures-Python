@@ -1,8 +1,8 @@
 class Node:
-    def __init__(self, value=None, prev_node=None, next_node=None):
-        self.prev_node = prev_node
+    def __init__(self, value, prev_node=None, next_node=None):
+        self.prev_node = None
         self.value = value
-        self.next_node = next_node
+        self.next_node = None
 
     def get_value(self):
         return self.value
@@ -32,36 +32,38 @@ class LinkedList:
             self.head = node
             self.tail = node
         else:
-            node.prev_node = self.head
+            node.next_node = self.head
+            self.head.prev_node = node
             self.head = node
-            self.head.next = node
         
     
 
     def contains(self, value):
-        if not self.head:
-            return False
-
+        # set current
         current = self.head
 
         while current:
-            if current.get_value() == value:
+            # check current value
+            # if equal then return true
+            if current.value == value:
                 return True
-
-            current = current.get_next()
+            # other wise change current to 
+            else:
+                current = current.next_node
 
         return False
 
     def reverse_list(self, node, prev):
-        # if the node is None return
+        # if prev is none
+        # then the node is the head and we set it to be tail
         if node is None:
             return
-        # if the prev is none then make that node the tail
         if prev is None:
-            node = self.tail
-        
-        # if it is next then make it
+            self.tail = node
         if node.next_node is None:
-            node = self.head
-        else:
-            node.prev_node = node.next_node
+            self.head = node
+        self.reverse_list(node.next_node, node)
+        node.prev_node = node.next_node
+        node.next_node = prev
+        
+        
