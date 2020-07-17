@@ -83,6 +83,8 @@ duplicates = []  # Return the list of duplicates in this data structure
 # then iterate once through the second list 
 # check if the binary tree contains the value
 # if the tree contains the value append to duplicates
+
+# O(log n) run time
 first_name = BSTNode(names_1[0])
 for i in names_1:
     if i != names_1[0]:
@@ -93,6 +95,8 @@ for i in names_2:
     if first_name.contains(i):
         duplicates.append(i)
 
+
+# this is a quadratic runtime
 # Replace the nested for loops below with your improvements
 # for name_1 in names_1:
 #     for name_2 in names_2:
